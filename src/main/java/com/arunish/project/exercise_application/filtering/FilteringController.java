@@ -22,7 +22,7 @@ public class FilteringController {
 	
 	
 	
-	@GetMapping("/user")
+	/*@GetMapping("/user")
 	//@JsonView(Views.Internal.class)
 	public MappingJacksonValue displayUser()
 	{	
@@ -34,9 +34,16 @@ public class FilteringController {
 		   mapping.setFilters(filters);
 		
 		return mapping;
+	}*/
+	
+	@GetMapping("/user")
+	@JsonView(Views.Public.class)
+	public List<User>  displayUser()
+	{
+		return userService.getAllUsers();
 	}
 	
-	@PostMapping("/user")
+	/*@PostMapping("/user")
 	//@JsonView(Views.Public.class)
 	public MappingJacksonValue addUser(@RequestBody User user)
 	{
@@ -56,5 +63,19 @@ public class FilteringController {
 	   mapping.setFilters(filters);
 	   
 	   return mapping;
-	}
+	}*/
+	
+     @PostMapping("/user")
+     @JsonView(Views.Public.class)
+     public User addUser(@RequestBody User user)
+ 	{
+ 		if(user.getUserName()==null || user.getPassword()==null)
+ 		{
+ 			throw new CredentialsNotValid("Invalid Credentials (No fields should be NULL)");
+ 		}
+ 	   User savedUser=userService.saveUser(user);
+ 	   
+ 	   
+ 	   return savedUser;
+ 	}
 }

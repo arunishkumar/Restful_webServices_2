@@ -4,14 +4,14 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
-@JsonFilter("UserFilter")
+//@JsonFilter("UserFilter")
 public class User{
 	
-	     //@JsonView(Views.Public.class)
+	     @JsonView(Views.Public.class)
          private String userName;
          
          //@JsonIgnore
-	     //@JsonView(Views.Internal.class)
+	     @JsonView(Views.Internal.class)
          private String password;
          
          
